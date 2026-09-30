@@ -3,7 +3,7 @@
 # then run the persistent worker as the PRIMARY publisher with a /health
 # endpoint on $PORT. Secrets come only from the host's env vars.
 set -euo pipefail
-: "${GIT_DEPLOY_KEY_B64:?set GIT_DEPLOY_KEY_B64 (base64 of the deploy key's private key)}"
+: "${GIT_DEPLOY_KEY_B64:?set GIT_DEPLOY_KEY_B64 as base64 of the deploy private key}"
 REPO="${KOGOTO_REPO:-Barmms/kogoto-content-engine}"
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
 echo "$GIT_DEPLOY_KEY_B64" | base64 -d > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
