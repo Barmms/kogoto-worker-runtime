@@ -16,6 +16,12 @@ cd /srv/repo
 git config user.name "kogoto-social-worker"
 git config user.email "noreply@users.noreply.github.com"
 git config pull.rebase true
+# prove the deploy key can WRITE (history push = cross-executor dedup)
+if git push --dry-run -q origin HEAD:main 2>/tmp/push_check.txt; then
+  echo "GIT_PUSH_ACCESS=OK"
+else
+  echo "GIT_PUSH_ACCESS=FAILED: $(head -c 300 /tmp/push_check.txt)"
+fi
 pip install -q -r /srv/repo/requirements.txt   # keep deps in sync with the private repo
 export PYTHONPATH=/srv/repo
 exec python -m marketing_engine social-worker --git-sync --prepare --poll-seconds 45 --http-port "${PORT:-10000}"
