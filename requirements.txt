@@ -1,0 +1,17 @@
+# Kogoto content engine — Python dependencies.
+# Zero paid services. Pillow does all layout/typography/animation; FFmpeg
+# (system binary, not a pip package) does H.264 encoding. The media
+# collector uses only the standard library (sqlite3, urllib) — no new
+# runtime dependency for Phase 3.
+
+Pillow==11.3.0
+
+# Parses .github/workflows/*.yml for the security scanner
+# (scripts/pre_push_security_check.sh, marketing_engine.automation.secret_scan)
+# and the workflow-safety test suite. Found missing during the first real
+# GitHub Actions run of cloud-dry-run.yml — it had only ever been installed
+# ad hoc in the local dev venv, never declared.
+PyYAML==6.0.3
+
+# --- dev / test only ---
+pytest==8.3.4
